@@ -30,8 +30,9 @@ socket.on("initiator", (initiator) => {
     });
     peer.on("stream", (stream) => {
       REMOTESTREAM = stream;
+      console.log(`remote stream : `, REMOTESTREAM);
+      video.srcObject = REMOTESTREAM;
     });
-    peer.on("data", (data) => console.log(data));
   } else alert("haha sucks to be you the room is already taken");
 });
 var video = document.createElement("video");
@@ -52,6 +53,7 @@ var constraints = {
 /* Stream it to video element */
 navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
   LOCALSTREAM = stream;
+  console.log(`local stream :`, LOCALSTREAM);
 });
 
 videodiv.appendChild(video);
