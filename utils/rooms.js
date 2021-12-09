@@ -9,7 +9,7 @@ function joinRoom(room) {
 }
 function AddSdp(sdp, room) {
   if (sdp.type === "offer") {
-    rooms[room].push(sdp);
+    rooms[room][0] = sdp;
     return true;
   }
 }

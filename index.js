@@ -2,7 +2,7 @@ const express = require("express");
 const http = require("http");
 const socketio = require("socket.io");
 const bodyParser = require("body-parser");
-const { joinRoom, AddSdp, DeleteRoom } = require("./rooms/rooms");
+const { joinRoom, AddSdp, DeleteRoom } = require("./utils/rooms");
 const app = express();
 app.use(express.static(`${__dirname}/views`));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -14,6 +14,7 @@ app.get("/", (req, res) => {
 io.on("connect", (socket) => {
   socket.on("room", (room) => {
     initiator = joinRoom(room);
+    console.log(initiator);
     socket.emit("initiator", initiator);
     if (initiator !== "roomfull") {
       socket.join(room);
